@@ -16,22 +16,16 @@
 <button onclick="sendCommands(['KEY_CHANNELDOWN'])">ch down</button>
 
 <script>
-var httpRequest;
-if (window.XMLHttpRequest) { // 모질라, 사파리등 그외 브라우저, ...
-    httpRequest = new XMLHttpRequest();
-} else if (window.ActiveXObject) { // IE 8 이상
-    httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+var httpRequest
+if (window.XMLHttpRequest) {
+    httpRequest = new XMLHttpRequest()
+} else if (window.ActiveXObject) {
+    httpRequest = new ActiveXObject("Microsoft.XMLHTTP")
 }
 
 function sendCommands(commands) {
-  console.log(commands);
-  for(var i = 0; i < commands.length; i++) {
-    var c = commands[i];
-    setTimeout(function() {
-      console.log(c);
-      httpRequest.open('GET', 'http://qnnp.net:2002/api/remocon?command=' + c, true);
-      httpRequest.send(null);
-    }, 200);
-  }
+  console.log(commands)
+  httpRequest.open('GET', 'http://qnnp.net:2002/api/remocon?commands=' + commands, true)
+  httpRequest.send(null)
 }
 </script>
