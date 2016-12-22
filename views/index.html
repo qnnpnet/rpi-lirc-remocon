@@ -1,0 +1,37 @@
+<button onclick="sendCommands(['KEY_SETTOPPOWER'])">POWER</button>
+<button onclick="sendCommands(['KEY_SOURCE', 'KEY_OK'])">SOURCE</button>
+<button onclick="sendCommands(['KEY_PREVIOUS'])">PREVIOUS</button>
+<br>
+<button onclick="sendCommands(['KEY_5', 'KEY_OK'])">SBS</button>
+<button onclick="sendCommands(['KEY_7', 'KEY_OK'])">KBS2</button>
+<button onclick="sendCommands(['KEY_9', 'KEY_OK'])">KBS1</button>
+<br>
+<button onclick="sendCommands(['KEY_1', 'KEY_1', 'KEY_OK'])">MBC</button>
+<button onclick="sendCommands(['KEY_1', 'KEY_5', 'KEY_OK'])">JTBC</button>
+<button onclick="sendCommands(['KEY_1', 'KEY_9', 'KEY_OK'])">tvN</button>
+<br>
+<button onclick="sendCommands(['KEY_VOLUMEUP'])">vol up</button>
+<button onclick="sendCommands(['KEY_VOLUMEDOWN'])">vol down</button>
+<button onclick="sendCommands(['KEY_CHANNELUP'])">ch up</button>
+<button onclick="sendCommands(['KEY_CHANNELDOWN'])">ch down</button>
+
+<script>
+var httpRequest;
+if (window.XMLHttpRequest) { // 모질라, 사파리등 그외 브라우저, ...
+    httpRequest = new XMLHttpRequest();
+} else if (window.ActiveXObject) { // IE 8 이상
+    httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+function sendCommands(commands) {
+  console.log(commands);
+  for(var i = 0; i < commands.length; i++) {
+    var c = commands[i];
+    setTimeout(function() {
+      console.log(c);
+      httpRequest.open('GET', 'http://qnnp.net:2002/api/remocon?command=' + c, true);
+      httpRequest.send(null);
+    }, 200);
+  }
+}
+</script>

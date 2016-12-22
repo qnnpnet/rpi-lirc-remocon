@@ -39,8 +39,15 @@ var fauxMo = new FauxMo({
   ]
 });
 
+
+app.get('/', function(req, res) {
+  console.log("index");
+  return res.render('index');
+});
+
 // Handles the route for echo apis
 app.get('/api/remocon', function(req, res) {
   console.log("received echo request");
   sendCommand(req.query.command);
+  return res.status(200).end();
 });
